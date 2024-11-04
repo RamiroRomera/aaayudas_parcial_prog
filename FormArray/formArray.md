@@ -124,36 +124,58 @@ Objeto en console.log():
 
 Y nuestro HTML tendria que haber quedado algo asi:
 ```html
-<button type="button" class="btn btn-success mb-5" (click)="add()">Agregar Modulo</button>
+<form [formGroup]="budgetForm" (ngSubmit)="onSubmit()">
 
-<div class="" formArrayName="modules">
+    <!--- OTROS INPUTS DEL FORM PADRE --->
+    <!--- OTROS INPUTS DEL FORM PADRE --->
+    <!--- OTROS INPUTS DEL FORM PADRE --->
+    <!--- OTROS INPUTS DEL FORM PADRE --->
 
-    @for (module of modules.controls; track $index) {
-        <div class="" [formGroupName]="$index">
-            <h4 class="form-label">Modulo #{{$index + 1}}</h4>
-            <button type="button" class="btn btn-close m-3" (click)="remove($index)"></button>
 
-            <label class="form-label">Tipo Modulo</label>
-            <select name="" id="moduleType" class="form-control" formControlName="moduleType">
-                @for (type of modulesTypes; track type) {
-                    <option [ngValue]="type">{{type.name}}</option>
-                }
-            </select>
+    <!--- EMPIEZA EL FORM ARRAY --->
+    <!--- EMPIEZA EL FORM ARRAY --->
+    <!--- EMPIEZA EL FORM ARRAY --->
+    <!--- EMPIEZA EL FORM ARRAY --->
+    <button type="button" class="btn btn-success mb-5" (click)="add()">Agregar Modulo</button>
 
-            <label class="form-label">Ambiente</label>
-            <select name="" id="ambient" class="form-control" formControlName="ambient">
-                @for (ambient of ambients; track ambient) {
-                    <option [value]="ambient">{{ambient}}</option>
-                }
-            </select>
+    <div class="" formArrayName="modules">
 
-            <label class="form-label">Precio</label>
-            <input type="number" name="" id="price" class="form-control" formControlName="price">
+        @for (module of modules.controls; track $index) {
+            <div class="" [formGroupName]="$index">
+                <h4 class="form-label">Modulo #{{$index + 1}}</h4>
+                <button type="button" class="btn btn-close m-3" (click)="remove($index)"></button>
 
-            <label class="form-label">Lugares</label>
-            <input type="text" name="" id="places" class="form-control" formControlName="places">
+                <label class="form-label">Tipo Modulo</label>
+                <select name="" id="moduleType" class="form-control" formControlName="moduleType">
+                    @for (type of modulesTypes; track type) {
+                        <option [ngValue]="type">{{type.name}}</option>
+                    }
+                </select>
 
-        </div>
-    }
-</div>
+                <label class="form-label">Ambiente</label>
+                <select name="" id="ambient" class="form-control" formControlName="ambient">
+                    @for (ambient of ambients; track ambient) {
+                        <option [value]="ambient">{{ambient}}</option>
+                    }
+                </select>
+
+                <label class="form-label">Precio</label>
+                <input type="number" name="" id="price" class="form-control" formControlName="price">
+
+                <label class="form-label">Lugares</label>
+                <input type="text" name="" id="places" class="form-control" formControlName="places">
+
+            </div>
+        }
+    </div>
+    <!--- TERMINA EL FORM ARRAY --->
+    <!--- TERMINA EL FORM ARRAY --->
+    <!--- TERMINA EL FORM ARRAY --->
+    <!--- TERMINA EL FORM ARRAY --->
+
+
+    <button type="submit" class="btn btn-primary">Enviar</button>
+
+</form>
+
 ```
