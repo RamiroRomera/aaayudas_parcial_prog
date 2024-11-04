@@ -13,6 +13,11 @@ export const appConfig: ApplicationConfig = {
 };
 ```
 
+Volviendo a la implementacion de servicios `HttpClient`, comenzaremos ejecutando:
+```cmd
+ng g s Budget
+```
+
 - En caso de que creemos un servicio, tambien tendriamos que agregarlo aca, de la siguiente forma:
 <br>En el ejemplo usamos el `BudgetService`
 
@@ -25,11 +30,6 @@ export const appConfig: ApplicationConfig = {
     BudgetService
   ],
 };
-```
-
-Volviendo a la implementacion de servicios `HttpClient`, comenzaremos ejecutando:
-```cmd
-ng g s Budget
 ```
 
 Los imports necesarios serian los siguientes:
