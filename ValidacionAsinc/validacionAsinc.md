@@ -2,7 +2,7 @@
 
 ### Consejo: Yo normalmente para los validadores sincronicos hago una carpeta aparte `src -> app -> validators-> async`
 
-### Las validaciones para que pasen del todo, tienen que ir hasta el final de nuestra funcion sin tocar ningun return, solo en ese caso no tendremos ningun error.
+### Las validaciones para que pasen del todo, tienen que ir hasta el final de nuestra funcion sin tocar ningun return que devuelva `true`, solo en ese caso no tendremos ningun error. En caso de que sea un null o of(null), significa que la validacion pasara con exito, sin que salte ningun error. Y si ven que pongo varios null antes del `if` grande es pq hay otros validadores sincronicos que se encargan que los valores no queden vacios, como el `Validators.required`.
 
 Los import necesarios para hacer un validador sincronico son:
 ```ts
@@ -19,8 +19,8 @@ import { PlotService } from "../services/plot.service";
 Normalmente empiezan asi:
 ```ts
 
-export const plotForOwnerValidator = (service: PlotService): AsyncValidatorFn => {
-    return (control: AbstractControl): Observable<ValidationErrors | null> => {
+export const plotValidator = (service: PlotService): AsyncValidatorFn => {
+  return (control: AbstractControl): Observable<ValidationErrors | null> => {
         if (!control.parent) {
             return of(null);
         }
@@ -51,14 +51,13 @@ El resto de lineas es la susecion de if's para hacer que pase la validacion o no
 return timer(1000).pipe(
     switchMap(() =>
     service.getPlotByPlotNumberAndBlockNumber(plotNumber, blockNumber).pipe(
-            map(() => {
-            return null;
+            map(() => {                
+                return of({ plotExists: true }); 
             }),
             catchError((error) => {
             // Status 404 === El plot existe.
             if (error.status === 404) {
-                // Como yo quiero que el lote no exista devuelvo este error
-                return of({ plotExists: true }); 
+                return of(null);
             }
             // Si el back no responde tampoco lo dejo pasar
             return of({ serverError: true });
@@ -69,7 +68,7 @@ return timer(1000).pipe(
 ```
 
 Y la aplicacion en el formulario reactivo se hace de la siguiente manera:
-<br> En este caso el plotNumber va a almacenar el error en caso de tenerlo.
+<br> En este caso el plotNumber va a almacenar el error en caso de tenerlo. Fijense que la funcion que declaramos en el paso 3 es la misma que aplicamos en el `tercer argumento` del `new FormControl()`.
 
 ```ts
 plotForm = new FormGroup({

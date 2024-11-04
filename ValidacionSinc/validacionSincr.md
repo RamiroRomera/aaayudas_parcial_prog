@@ -2,7 +2,8 @@
 
 ### Consejo: Yo normalmente para los validadores sincronicos hago una carpeta aparte `src -> app -> validators-> sync`
 
-### Las validaciones para que pasen del todo, tienen que ir hasta el final de nuestra funcion sin tocar ningun return, solo en ese caso no tendremos ningun error y el valid dara true.
+### Las validaciones para que pasen del todo, tienen que ir hasta el final de nuestra funcion sin tocar ningun return que devuelva `true`, solo en ese caso no tendremos ningun error. En caso de que sea un null o of(null), significa que la validacion pasara con exito, sin que salte ningun error. Y si ven que pongo varios null antes del `if` grande es pq hay otros validadores sincronicos que se encargan que los valores no queden vacios, como el `Validators.required`.
+
 
 Los import necesarios para hacer un validador sincronico son:
 ```ts
@@ -28,7 +29,7 @@ Despues siempre es agarrar el valor del control que queremos validar y hacer un 
 
     // Validar que tenga 22 dígitos
     if (bankAccount.length !== 22) {
-      return { validBankAccount: true }
+      return { invalidBankAccount: true }
     } else {
         return null;
     }
