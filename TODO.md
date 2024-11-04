@@ -1,4 +1,2 @@
 - Agregar explicacion del valueChanges.subscribe()
 - Explicar el [ngValue] para los select
-- Explicar validador sincrono
-- Explicar validador asincrono
