@@ -12,14 +12,14 @@ budgetForm: FormGroup = new FormGroup({
 ```
 
 Tenemos que declarar las siguientes funcines:
-- get ( para obtener el FormArray ).
+- `get` ( para obtener el `FormArray` ).
 ```typescript
 get modules() {
     return this.budgetForm.controls['modules'] as FormArray;
 }
 ```
 
-- add ( para agregar otro form ). En esta funcion vamos a declarar lo que seria nuestro "form hijo".
+- `add` ( para agregar otro form ). En esta funcion vamos a declarar lo que seria nuestro "form hijo".
 ```typescript
 add() {
     const newModuleForm = new FormGroup({
@@ -33,20 +33,23 @@ add() {
 }
 ```
 
-- remove ( en caso de querer eliminar un form llamarias esta funcion ). Aclaracion: En caso de que quieran que siempre exista por lo menos un form en el array, pueden iniciar uno en el ngOnInit con add() y aca podrian hacer un if (index <= 1) { return; }
+- `remove` ( en caso de querer eliminar un form llamarias esta funcion ). 
 ```typescript
 remove(index: number) {
     this.modules.removeAt(index)
 }
 ```
 
+### Aclaracion: En caso de que quieran que siempre exista por lo menos un form en el array, pueden iniciar uno en el `ngOnInit` con `add()` y en el remove podrian hacer un `if (index <= 1) { return; }`
+<hr/>
+
 Pasando al HTML, dentro de su "form padre" (budgetForm, en este caso), van a tener las siguientes implementaciones, como si estuvieran a la altura de un input normal.
-- En algun lado tendria que haber un btn de agregar. Y le agregaremos el evento (click)="add()". Este btn suele estar fuera del ciclo @for que haremos a continuacion.
+- En algun lado tendria que haber un btn de agregar. Y le agregaremos el evento `(click)="add()"`. Este btn suele estar fuera del ciclo `@for` que haremos a continuacion.
 ```html
 <button type="button" class="btn btn-success mb-5" (click)="add()">Agregar Modulo</button>
 ```
-- Definiremos un div y adentro del div, un @for de la siguiente manera:
-<br>Explico asi por encima que hace, el formArrayName hara referencia a nuestra funcion "get modules()", pero no hara falta el parentesis por el get, y el controls se refiere como si fuera el length. Trakeamos el $index para remover en caso de que sea necesario.
+- Definiremos un div y adentro del div, un `@for` de la siguiente manera:
+<br>Explico asi por encima que hace, el formArrayName hara referencia a nuestra funcion "get modules()", pero no hara falta el parentesis por el `get` al principio de la funcion y el controls se refiere como si fuera el length. Trakeamos el `$index` para remover en caso de que sea necesario.
 ```html
 <div class="" formArrayName="modules">
 
@@ -56,7 +59,7 @@ Pasando al HTML, dentro de su "form padre" (budgetForm, en este caso), van a ten
 </div>
 ```
 
-Dentro del form definiremos otro div de la siguiente manera, destacando la directiva [formGroupName]="$index".
+Dentro del form definiremos otro div de la siguiente manera, destacando la directiva `[formGroupName]="$index"`.
 ```html
 @for (module of modules.controls; track $index) {
     <div class="" [formGroupName]="$index">
@@ -90,18 +93,18 @@ El proximo paso consiste en lo mas facil, que seria poner todos los inputs dentr
 <input type="text" name="" id="places" class="form-control" formControlName="places">
 ```
 
-En algun momento, nos encontraremos al boton de remover, puede ser una X o un btn danger, lo que sea pero para remover, en el cual asignaremos en el evento (click), nuestra funcion remove($index) pasandole el indice para que sepa cual tiene que remover.
+En algun momento, nos encontraremos al boton de remover, puede ser una X o un btn danger, lo que sea pero para remover, en el cual asignaremos en el evento `(click)`, nuestra funcion `remove($index)` pasandole el indice para que sepa cual tiene que remover.
 ```html
 <button type="button" class="btn btn-close m-3" (click)="remove($index)"></button>
 ```
 
-Al momento de submitear, nuestro "form padre" (budgetForm, en este caso) tendra un array con los valores como si pusieramos el moduleForm.value, pero al ser un array siempre vendra en formato [ ]
+Al momento de submitear, nuestro "form padre" (budgetForm, en este caso) tendra un array con los valores como si pusieramos el moduleForm.value, pero al ser un array siempre vendra en formato `[]`
 ```typescript
 if (this.budgetForm.valid) {
     console.log(this.budgetForm.value)
 }
 ```
-Objeto en console.log(): 
+Objeto en `console.log()`: 
 ```json
 {
     "date": "1/11/2024",
@@ -122,7 +125,7 @@ Objeto en console.log():
 }
 ```
 
-Y nuestro HTML tendria que haber quedado algo asi:
+Y nuestro `HTML` tendria que haber quedado algo asi:
 ```html
 <form [formGroup]="budgetForm" (ngSubmit)="onSubmit()">
 
@@ -130,7 +133,6 @@ Y nuestro HTML tendria que haber quedado algo asi:
     <!--- OTROS INPUTS DEL FORM PADRE --->
     <!--- OTROS INPUTS DEL FORM PADRE --->
     <!--- OTROS INPUTS DEL FORM PADRE --->
-
 
     <!--- EMPIEZA EL FORM ARRAY --->
     <!--- EMPIEZA EL FORM ARRAY --->

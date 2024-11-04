@@ -7,7 +7,7 @@ import {CommonModule} from '@angular/common';
 
 ```
 
-El primer paso va a ser hacer el import en el @Component en el imports: [], ante la duda copien y peguen todo esto en el import:
+El primer paso va a ser hacer el import en el `@Component` en el `imports: []`, ante la duda copien y peguen todo esto en el imports:
 ```typescript
 imports: [
   ReactiveFormsModule,
@@ -16,7 +16,7 @@ imports: [
 ],
 ```
 
-Siguiendo la consigna vas haciendo cada prop que te pidan los profes. Recordar que el FormControl se puede aplicar a cualquier input/select, sin importar su naturaleza.
+Siguiendo la consigna vas haciendo cada prop que te pidan los profes. Recordar que el `FormControl` se puede aplicar a cualquier input/select, sin importar su naturaleza.
 ```typescript
 budgetForm: FormGroup = new FormGroup({
   fecha: new FormControl('', Validators.required),
@@ -25,7 +25,7 @@ budgetForm: FormGroup = new FormGroup({
 })
 ```
 
-Pasando al HTML, el primer paso es en nuestra etiquera form, declarar la directiva [formGroup]="" y la directiva (ngSubmit). Recordar que el formulario deberia tener un button con el type submit
+Pasando al HTML, el primer paso es en nuestra etiquera form, declarar la directiva `[formGroup]=""` y la directiva `(ngSubmit)`. Recordar que el formulario deberia tener un button con el `type="submit"`
 ```html
 <form [formGroup]="budgetForm" (ngSubmit)="onSubmit()">
     <!--- INPUTS --->
@@ -33,9 +33,8 @@ Pasando al HTML, el primer paso es en nuestra etiquera form, declarar la directi
 </form>
 ```
 
-Tambien es importante asignar la etiqueta "formControlName" en nuestro input/select. Ejemplo:
+Tambien es importante asignar la etiqueta `"formControlName"` en cada input/select. Ejemplo:
 ```html
-
       <label class="form-label">Fecha de Cotizacion</label>
       <input type="date" name="" id="fecha"
              class="form-control" formControlName="fecha">
@@ -49,7 +48,7 @@ Tambien es importante asignar la etiqueta "formControlName" en nuestro input/sel
              class="form-control" formControlName="altura">
 ```
 
-Para finalizar el cacheo de errores para mostrar fallbacks ( el mensaje rojo indicando que esta mal).
+Para finalizar el cacheo de errores para mostrar `fallbacks` ( el mensaje rojo indicando que esta mal ).
 ```html
 @if (budgetForm.get('altura')?.touched && budgetForm.get('altura')?.invalid) {
   @if (budgetForm.get('altura')?.getError('required')) { <small class="text-danger ms-2">Campo requerido.</small> }
@@ -57,7 +56,7 @@ Para finalizar el cacheo de errores para mostrar fallbacks ( el mensaje rojo ind
 }
 ```
 
-Para obtener todos los valores de nuestra form reactivo en el onSubmit, normalmente es:
+Para obtener todos los valores de nuestra form reactivo en el `onSubmit()`, normalmente es:
 ```typescript
 onSubmit() {
   if (this.budgetForm.valid) {
