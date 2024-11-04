@@ -1,2 +1,1 @@
 - Agregar explicacion del valueChanges.subscribe()
-- Explicar el [ngValue] para los select
