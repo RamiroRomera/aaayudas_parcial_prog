@@ -19,14 +19,14 @@ get modules() {
 - add ( para agregar otro form ). En esta funcion vamos a declarar lo que seria nuestro "form hijo".
 ```typescript
 addModule() {
-const newModuleForm = new FormGroup({
-    moduleType: new FormControl('', Validators.required),
-    ambient: new FormControl('', Validators.required),
-    price: new FormControl({ value: '', disabled: true }, Validators.required),
-    places: new FormControl({ value: '', disabled: true }, Validators.required),
-});
+    const newModuleForm = new FormGroup({
+        moduleType: new FormControl('', Validators.required),
+        ambient: new FormControl('', Validators.required),
+        price: new FormControl({ value: '', disabled: true }, Validators.required),
+        places: new FormControl({ value: '', disabled: true }, Validators.required),
+    });
 
-this.modules.push(newModuleForm);
+    this.modules.push(newModuleForm);
 }
 ```
 
@@ -37,7 +37,7 @@ removeModule(index: number) {
 }
 ```
 
-Pasando al HTML, su aplicacion es asi:
+Pasando al HTML, dentro de su "form padre" (budgetForm, en este caso), van a tener las siguientes implementaciones, como si estuvieran a la altura de un input normal.
 - En algun lado tendria que haber un btn de agregar. Y le agregaremos el evento (click)="add()"
 ```html
  <button type="button" class="btn btn-success mb-5" 
@@ -92,7 +92,7 @@ En algun momento, nos encontraremos al boton de remover, puede ser una X o un bt
 <button type="button" class="btn btn-close m-3" (click)="removeModule($index)"></button>
 ```
 
-Al momento de submitear, nuestro "form padre" (budgetForm, en este caso) tendra un array con los valores como si pusieramos el moduleForm.value, pero al ser un array siempre vendra en formato []
+Al momento de submitear, nuestro "form padre" (budgetForm, en este caso) tendra un array con los valores como si pusieramos el moduleForm.value, pero al ser un array siempre vendra en formato [ ]
 ```typescript
 if (this.budgetForm.valid) {
     console.log(this.budgetForm.value)
