@@ -68,4 +68,29 @@ return timer(1000).pipe(
 );
 ```
 
+Y la aplicacion en el formulario reactivo se hace de la siguiente manera:
+<br> En este caso el plotNumber va a almacenar el error en caso de tenerlo.
+
+```ts
+plotForm = new FormGroup({
+    plotNumber:  new FormControl('', [Validators.required, Validators.min(1)], [plotValidator(this.plotService)]),
+    blockNumber: new FormControl('', [Validators.required, Validators.min(1)]),
+    totalArea: new FormControl('', [Validators.required, Validators.min(1)]),
+    builtArea: new FormControl('', [Validators.required, Validators.min(1)]),
+    plotType: new FormControl('', [Validators.required]),
+    plotStatus: new FormControl('', [Validators.required])
+});
+```
+
+Y para mostrar el fallback de este error, tenemos que usar el mismo mensajes que mandemos como true.
+- `getError('serverError')`: Indica que el servidor no tuvo respuesta, osea que se cayo el back.
+- `getError('plotExists')`: Indica que ya existe ese nro de lote en la manzana.
+
+```html
+@if (plotForm.get('plotNumber')?.dirty && plotForm.get('plotNumber')?.invalid) {
+    @if (plotForm.get('plotNumber')?.getError('plotExists')) { <small class="text-danger ms-2">Ya existe ese numero de lote en la manzana.</small> }
+    @if (plotForm.get('plotNumber')?.getError('serverError')) { <small class="text-danger ms-2">Error en el servidor, por favor intenta nuevamente.</small> }
+}
+```
+
 Dejo muchos mas ejemplos de validacion async en <a href="/ValidacionAsinc/validacionAsinc.md">ejemplos</a>, pero van a ver que son todos muy parecidos.
