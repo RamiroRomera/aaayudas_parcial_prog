@@ -74,3 +74,12 @@ export function cuitValidator(control: AbstractControl): ValidationErrors | null
     return checkDigit !== mod11 ? { invalidCuit: checkDigit !== mod11 } : null
 }
 ```
+
+Y se aplicaria de la siguiente forma en un form reactivo:
+<br> En caso de que sea un FormArray, se hace de la misma forma en donde declaramos la creacion del form, osea en el `add()`.
+
+```ts
+ownerForm = new FormGroup({
+    cuit: new FormControl('', [ Validators.required, Validators.pattern('^[0-9]*$'), cuitValidator ]),
+})
+```

@@ -69,6 +69,7 @@ return timer(1000).pipe(
 
 Y la aplicacion en el formulario reactivo se hace de la siguiente manera:
 <br> En este caso el plotNumber va a almacenar el error en caso de tenerlo. Fijense que la funcion que declaramos en el paso 3 es la misma que aplicamos en el `tercer argumento` del `new FormControl()`.
+<br> En caso de que sea un FormArray, se hace de la misma forma en donde declaramos la creacion del form, osea en el `add()`.
 
 ```ts
 plotForm = new FormGroup({
