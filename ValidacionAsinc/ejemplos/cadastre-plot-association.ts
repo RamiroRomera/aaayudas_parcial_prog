@@ -7,7 +7,7 @@ import {OwnerPlotService} from "../services/owner-plot.service";
 export const cadastrePlotAssociation = (service: OwnerPlotService, plotId: number): AsyncValidatorFn => {
   return (control: AbstractControl): Observable<ValidationErrors | null> => {
 
-    //TODO: Hacer que esto se ejecute, pq no se ejecuta.
+    
 
     console.log(plotId)
     console.log(plotId)
@@ -18,10 +18,7 @@ export const cadastrePlotAssociation = (service: OwnerPlotService, plotId: numbe
       return of(null);
     }
 
-    console.log("VIVA LA PEPA")
-    console.log("VIVA LA PEPA")
-    console.log("VIVA LA PEPA")
-    console.log("VIVA LA PEPA")
+    
 
     return timer(1000).pipe(
       switchMap(() =>
